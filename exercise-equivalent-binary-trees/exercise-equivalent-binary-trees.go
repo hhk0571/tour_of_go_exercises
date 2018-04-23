@@ -10,6 +10,7 @@ package main
 
 import (
 	"fmt"
+
 	"golang.org/x/tour/tree"
 )
 
@@ -17,9 +18,13 @@ import (
 // from the tree to the channel ch.
 func Walk(t *tree.Tree, ch chan int) {
 	_walk(t, ch)
+
+	// DON'T forget to close channel, which will
+	// inform receiver of the completion of data transmission.
 	close(ch)
 }
 
+// helper function performs recursion of tree walking
 func _walk(t *tree.Tree, ch chan int) {
 	if t != nil {
 		_walk(t.Left, ch)
@@ -58,4 +63,3 @@ func main() {
 	fmt.Println(Same(tree.New(1), tree.New(1)))
 
 }
-
